@@ -16,5 +16,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String s = bundle.getString("username");
         Toast.makeText(this, "welcome, "+s, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
     }
 }
