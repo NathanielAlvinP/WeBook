@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">WeBook</string>
+    <string name="notes">Notes</string>
+    <string name="link_url">Link URL</string>
+    <string name="to_do_list">To Do List</string>
+    <string name="image">Image</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="we_book">We Book</string>
+    <string name="info_webook_co_id">info@webook.co.id</string>
 </resources>
