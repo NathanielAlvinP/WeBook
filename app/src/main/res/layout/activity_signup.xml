@@ -4,7 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="@drawable/backend1">
 
     <TextView
         android:id="@+id/textSignUp"
@@ -15,51 +20,62 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.14"
-        tools:layout_editor_absoluteX="-16dp" />
+        tools:layout_editor_absoluteX="-16dp"
+        android:textColor="@color/azure"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        />
 
     <EditText
         android:id="@+id/emailSign"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/boxtext"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/azure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.374"
+        tools:layout_editor_absoluteX="29dp" />
 
     <EditText
         android:id="@+id/passSign"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/boxtext"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/azure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="85dp" />
+        app:layout_constraintVertical_bias="0.457"
+        tools:layout_editor_absoluteX="16dp" />
 
     <EditText
         android:id="@+id/passCheck"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="re enter password"
+        android:layout_height="40dp"
+        android:background="@drawable/boxtext"
+        android:hint="Password Confirmation"
         android:inputType="textPassword"
+        android:textColorHint="@color/azure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.535"
+        tools:layout_editor_absoluteX="-3dp" />
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue_light"
         android:text="Sign Up"
+        android:textColor="@color/azure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.623" />
 </androidx.constraintlayout.widget.ConstraintLayout>
