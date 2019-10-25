@@ -8,4 +8,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="we_book">We Book</string>
     <string name="info_webook_co_id">info@webook.co.id</string>
+    <string name="fragment_test">Fragment Test</string>
+    <string name="fragment_notes">Fragment Notes</string>
+    <string name="fragment_url">Fragment URL</string>
+    <string name="fragment_todo">Fragment ToDO</string>
+    <string name="fragment_image">Fragment Image</string>
 </resources>

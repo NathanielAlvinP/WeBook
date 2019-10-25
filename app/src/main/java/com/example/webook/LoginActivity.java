@@ -3,7 +3,6 @@ package com.example.webook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +12,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
-    private Button loginButton;
-    private TextView signup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Email=findViewById(R.id.Email);
         Pass = findViewById(R.id.Password);
-        loginButton=findViewById(R.id.LoginButton);
-        TextView signup = (TextView)findViewById(R.id.SignUp);
+        Button loginButton = findViewById(R.id.LoginButton);
+        TextView signup = findViewById(R.id.SignUp);
 
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,9 +50,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected boolean CheckLogin(String email, String pass){
-        if(email.equals("admin") && pass.equals("123456"))
-            return true;
-        else
-            return false;
+        return email.equals("admin") && pass.equals("123456");
     }
 }
