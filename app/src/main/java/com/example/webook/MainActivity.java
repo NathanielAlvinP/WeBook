@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
             navigationView.setCheckedItem(R.id.navigation_notes);
         }
-
     }
 
     @Override
