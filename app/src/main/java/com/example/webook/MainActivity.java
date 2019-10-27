@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle bundle = getIntent().getExtras();
         String s = null;
         if (bundle != null) {
-            s = bundle.getString("username");
+            s = bundle.getString("email");
         }
-
+        Toast.makeText(this, "Welcome, "+s, Toast.LENGTH_SHORT).show();
         //toolbar for drawer navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
