@@ -33,12 +33,12 @@ public class SignupActivity extends AppCompatActivity {
                 String repass = passCheck.getText().toString();
                 if(pass.isEmpty() == false && email.isEmpty() == false && pass.equals(repass)){
                     Toast.makeText(SignupActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
-                    Intent main = new Intent(SignupActivity.this,MainActivity.class);
+                    Intent main = new Intent(SignupActivity.this,LoginActivity.class);
                     finish();
                     startActivity(main);
                 }else if(pass.isEmpty() || repass.isEmpty() || email.isEmpty()){
                     Toast.makeText(SignupActivity.this, "All field must be entered", Toast.LENGTH_SHORT).show();
-                }else if(pass.equals(repass) == false){
+                }else if(pass.equalsIgnoreCase(repass) == false){
                     Toast.makeText(SignupActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                 }
             }

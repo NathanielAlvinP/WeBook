@@ -1,5 +1,6 @@
 package com.example.webook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,9 +29,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (bundle != null) {
             s = bundle.getString("username");
         }
-        Toast.makeText(this, "welcome, "+s, Toast.LENGTH_SHORT).show();
-
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
 
         //toolbar for drawer navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,6 +76,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.navigation_image:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ImageFragment()).commit();
+                break;
+            case R.id.navigation_setting:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment()).commit();
+                break;
+            case  R.id.navigation_exit:
+                Intent home = new Intent(MainActivity.this,LoginActivity.class);
+                finish();
+                startActivity(home);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
