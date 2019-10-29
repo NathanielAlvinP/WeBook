@@ -15,12 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView signup = findViewById(R.id.SignUp);
 
         //check apakah user sudah login
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                if(user != null){
-                    Toast.makeText(LoginActivity.this, "Already Logged In", Toast.LENGTH_SHORT).show();
-                    Intent main = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(main);
-                }
-            }
-        };
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -88,9 +75,5 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-    }
-
-    protected boolean CheckLogin(String email, String pass){
-        return email.equals("admin") && pass.equals("123456");
     }
 }

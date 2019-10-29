@@ -6,4 +6,5 @@
     <color name="azure">#F0FFFF</color>
     <color name="kuning">#ffff00</color>
     <color name="blue_light">	#1E90FF</color>
+    <color name="backgroundColor">#C3C7D6</color>
 </resources>
