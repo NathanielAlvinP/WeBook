@@ -5,6 +5,17 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/navigation_sigin"
+            android:title="Sign In"
+            android:icon="@drawable/ic_login"
+            />
+
+        <item
+            android:id="@+id/navigation_home"
+            android:title="Home"
+            android:icon="@drawable/ic_home"/>
+
+        <item
             android:id="@+id/navigation_notes"
             android:icon="@drawable/ic_notes"
             android:title="@string/notes"/>
@@ -29,7 +40,7 @@
         <item
             android:id="@+id/navigation_exit"
             android:icon="@drawable/ic_exit"
-            android:title="Exit"
+            android:title="Log Out"
             />
     </group>
 </menu>

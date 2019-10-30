@@ -3,18 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:openDrawer="start"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawer_layout_nologin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_nologin"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -23,18 +22,18 @@
             android:elevation="4dp"/>
 
         <FrameLayout
-            android:id="@+id/fragmentContainer"
+            android:id="@+id/fragmentNoLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_Login"
+        android:id="@+id/nav_view_noLogin"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_drawer_header"
-        app:menu="@menu/menu_drawer"/>
-
+        app:headerLayout="@layout/nav_header_nologin"
+        app:menu="@menu/menu_nologin"
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>
