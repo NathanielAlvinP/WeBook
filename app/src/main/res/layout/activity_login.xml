@@ -97,7 +97,7 @@
         android:id="@+id/GuestMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login as Guest Mode"
+        android:text="Login as Guest"
         android:textColor="@color/kuning"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
