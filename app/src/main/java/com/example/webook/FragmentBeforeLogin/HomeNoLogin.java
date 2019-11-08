@@ -3,8 +3,6 @@ package com.example.webook.FragmentBeforeLogin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.webook.ImageFragment;
 import com.example.webook.LoginActivity;
-import com.example.webook.MainActivity;
-import com.example.webook.NotesFragment;
 import com.example.webook.R;
-import com.example.webook.SettingFragment;
-import com.example.webook.TodoFragment;
-import com.example.webook.UrlFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeNoLogin  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
-    private TextView textView;
+public class HomeNoLogin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
 
     @Override
@@ -46,7 +37,7 @@ public class HomeNoLogin  extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentNoLogin, new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.navigation_home);
         }
@@ -54,17 +45,16 @@ public class HomeNoLogin  extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.navigation_sigin:
                 Intent login = new Intent(HomeNoLogin.this, LoginActivity.class);
                 finish();
@@ -76,7 +66,7 @@ public class HomeNoLogin  extends AppCompatActivity implements NavigationView.On
             case R.id.navigation_setting:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentNoLogin, new SettingNoLoginFragment()).commit();
                 break;
-            case  R.id.navigation_exit:
+            case R.id.navigation_exit:
                 finish();
                 break;
         }

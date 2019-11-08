@@ -14,4 +14,5 @@
     <string name="fragment_todo">Fragment ToDO</string>
     <string name="fragment_image">Fragment Image</string>
     <string name="logo_webook">Logo WeBook</string>
+    <string name="save">Save</string>
 </resources>

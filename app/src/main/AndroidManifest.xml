@@ -23,10 +23,10 @@
         <activity
             android:name=".SignupActivity">
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".FragmentBeforeLogin.HomeNoLogin"></activity>
+        <activity android:name=".MainActivity">
         </activity>
+        <activity android:name=".AddData"></activity>
     </application>
 
 </manifest>

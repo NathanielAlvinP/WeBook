@@ -64,17 +64,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
+            case R.id.navigation_sigin:
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
             case R.id.navigation_notes:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
-                break;
-            case R.id.navigation_url:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new UrlFragment()).commit();
-                break;
-            case R.id.navigation_todo:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new TodoFragment()).commit();
-                break;
-            case R.id.navigation_image:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ImageFragment()).commit();
                 break;
             case R.id.navigation_setting:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment()).commit();
@@ -84,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 startActivity(home);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

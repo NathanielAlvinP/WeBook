@@ -1,15 +1,16 @@
 package com.example.webook;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.webook.FragmentBeforeLogin.HomeNoLogin;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
     private TextView guestMode;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                                     b.putString("email",emailInp);
                                     main.putExtras(b);
 
+                                sharedPreferences = getPreferences(MODE_PRIVATE);
+                                String userId = sharedPreferences.getString("FirebaseKey ", "");
+
                                     startActivity(main);
                             }else
                                     Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
@@ -78,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
         signup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
