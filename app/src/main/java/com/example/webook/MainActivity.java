@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (bundle != null) {
             s = bundle.getString("email");
         }
-        Toast.makeText(this, "Welcome, "+s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Welcome, " + s, Toast.LENGTH_SHORT).show();
         //toolbar for drawer navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,10 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
-            case R.id.navigation_sigin:
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                break;
             case R.id.navigation_notes:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
                 break;

@@ -7,11 +7,43 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class AddData extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tambah_data);
+
+//        Objects.requireNonNull(getActionBar()).setDisplayHomeAsUpEnabled(true);
+//        setTitle("Add Notes");
+
+        // expandable floating button to add image
+//        FloatingActionButton floatingActionButtonImage = findViewById(R.id.fab_image);
+//        floatingActionButtonImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showToast("Add Image");
+//            }
+//        });
+
+        // expandable floating button to add image
+//        FloatingActionButton floatingActionButtonLink = findViewById(R.id.fab_link);
+//        floatingActionButtonLink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showToast("Add Link");
+//            }
+//        });
+
+        // expandable floating button to add image
+//        FloatingActionButton floatingActionButtonNotes = findViewById(R.id.fab_notes);
+//        floatingActionButtonNotes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showToast("Add Notes");
+//            }
+//        });
+
 
     }
 
@@ -25,13 +57,13 @@ public class AddData extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.save) {
-            saveData();
+            saveNote();
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
     }
 
-    private void saveData() {
+    private void saveNote() {
 
     }
 }

@@ -19,7 +19,7 @@ public class SplashScreen extends AppCompatActivity {
 
         ImageView logo = findViewById(R.id.logo);
 
-        int splashTimeOut = 5000;
+        int splashTimeOut = 3000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

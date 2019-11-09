@@ -15,4 +15,24 @@
     <string name="fragment_image">Fragment Image</string>
     <string name="logo_webook">Logo WeBook</string>
     <string name="save">Save</string>
+
+    <string name="pref_syncConnectionType">Sync Connection Type</string>
+    <string name="pref_syncConnection_Dialog_Title">Perform Sync Using</string>
+    <string name="pref_syncConnection_Default_Summary">WiFI</string>
+    <string name="pref_syncConnectionType_Default_Value">WiFi</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+
+    <string-array name="pref_syncConnectionType_Entries">
+        <item>WiFi</item>
+        <item>Mobile</item>
+        <item>Wifi / Mobile</item>
+    </string-array>
+
+    <string-array name="pref_syncConnectionType_Values">
+        <item>Wifi</item>
+        <item>Mobile</item>
+        <item>WiFi_Mobile</item>
+    </string-array>
+
 </resources>
