@@ -14,4 +14,6 @@
         android:summary="@string/pref_syncConnection_Default_Summary"
         android:title="Sync Connection Type" />
 
+    <Preference android:title="Terms and Conditions" />
+
 </PreferenceScreen>

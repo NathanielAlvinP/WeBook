@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotesFragment extends Fragment {
+    private RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -27,11 +30,20 @@ public class NotesFragment extends Fragment {
             }
         });
 
+        recyclerView = rootView.findViewById(R.id.recycler_viewNote);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return rootView;
     }
 
     private void getTambahDataActivity(View.OnClickListener onClickListener) {
         Intent intent = new Intent(getActivity(), AddData.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }

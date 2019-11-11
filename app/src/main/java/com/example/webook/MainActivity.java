@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
                 break;
             case R.id.navigation_setting:
+//                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+//                startActivity(intent);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment()).commit();
                 break;
             case  R.id.navigation_exit:

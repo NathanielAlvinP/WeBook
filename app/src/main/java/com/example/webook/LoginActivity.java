@@ -1,7 +1,6 @@
 package com.example.webook;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +16,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                     mAuth.signInWithEmailAndPassword(emailInp, passInp).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            //jika berhasil
+                            //if login succeed
                             if(task.isSuccessful()){
                                     Intent main = new Intent(LoginActivity.this,MainActivity.class);
                                     Bundle b = new Bundle();
@@ -78,5 +81,20 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    //to check the user's online or not
+    public boolean isOnline() {
+        try {
+            int timeoutMs = 1500;
+            Socket socket = new Socket();
+            SocketAddress socketAddress = new InetSocketAddress("8.8.8.8", 53);
+
+            socket.connect(socketAddress, timeoutMs);
+            socket.close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

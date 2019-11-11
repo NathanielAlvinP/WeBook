@@ -5,24 +5,18 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/navigation_sigin"
-            android:title="Sign In"
-            android:icon="@drawable/ic_login"
-            />
-
-        <item
             android:id="@+id/navigation_notes"
             android:icon="@drawable/ic_notes"
             android:title="@string/notes"/>
         <item
             android:id="@+id/navigation_setting"
-            android:title="Setting"
+            android:title="@string/setting"
             android:icon="@drawable/ic_settings"
             />
         <item
             android:id="@+id/navigation_exit"
             android:icon="@drawable/ic_exit"
-            android:title="Log Out"
+            android:title="@string/log_out"
             />
     </group>
 </menu>

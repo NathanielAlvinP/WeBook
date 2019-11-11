@@ -1,80 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
 
-    <!--    <include-->
-    <!--        android:id="@+id/toolbar"-->
-    <!--        layout="@layout/toolbar">-->
-    <!--    </include>-->
 
-    <!--    <com.getbase.floatingactionbutton.FloatingActionsMenu-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        app:fab_addButtonColorNormal="@color/pink"-->
-    <!--        app:fab_addButtonColorPressed="@color/pink_pressed"-->
-    <!--        app:fab_labelStyle="@style/customFab"-->
-    <!--        android:layout_margin="15dp">-->
-
-    <!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:fab_colorNormal="@color/white"-->
-    <!--            app:fab_colorPressed="@color/white_pressed"-->
-    <!--            app:fab_size="mini"-->
-    <!--            app:fab_icon="@drawable/ic_image"-->
-    <!--            android:id="@+id/fab_image"-->
-    <!--            app:fab_title="Add Image"/>-->
-
-    <!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:fab_colorNormal="@color/white"-->
-    <!--            app:fab_colorPressed="@color/white_pressed"-->
-    <!--            app:fab_size="mini"-->
-    <!--            app:fab_icon="@drawable/ic_link"-->
-    <!--            android:id="@+id/fab_link"-->
-    <!--            app:fab_title="Add Link"/>-->
-
-    <!--        <com.getbase.floatingactionbutton.FloatingActionButton-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:fab_colorNormal="@color/white"-->
-    <!--            app:fab_colorPressed="@color/white_pressed"-->
-    <!--            app:fab_size="mini"-->
-    <!--            app:fab_icon="@drawable/ic_notes"-->
-    <!--            android:id="@+id/fab_notes"-->
-    <!--            app:fab_title="Add Notes"/>-->
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarData"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/titleNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/title"
+        android:inputType="text"
         android:paddingStart="10dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarData"
+        tools:ignore="Autofill,RtlSymmetry"
         tools:layout_editor_absoluteX="1dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/descriptionNote"
         android:layout_width="408dp"
-        android:layout_height="63dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:ems="10"
+        android:gravity="top"
         android:hint="@string/description"
         android:paddingStart="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@+id/titleNote"
+        tools:ignore="Autofill,MissingConstraints,RtlSymmetry,TextFields"
         tools:layout_editor_absoluteX="3dp" />
 
 

@@ -1,39 +1,24 @@
 package com.example.webook;
 
 public class UserData {
-    private String notes, link, toDo;
+    private String title, notes, link, toDo, desc;
 
     public UserData() {
         //empty constructor needed
     }
 
-    public UserData(String notes, String link, String toDo) {
+    public UserData(String notes, String title, String desc) {
+        this.title = title;
         this.notes = notes;
-        this.link = link;
-        this.toDo = toDo;
+        this.desc = desc;
+    }
+
+
+    public String getTitle() {
+        return title;
     }
 
     public String getNotes() {
         return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getToDo() {
-        return toDo;
-    }
-
-    public void setToDo(String toDo) {
-        this.toDo = toDo;
     }
 }
