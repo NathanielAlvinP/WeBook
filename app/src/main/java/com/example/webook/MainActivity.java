@@ -2,85 +2,133 @@ package com.example.webook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationView;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = firebaseFirestore.collection("Notes");
 
-    private DrawerLayout drawerLayout;
+    private NotesViewAdapter notesViewAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //to show message when the user is login
         Bundle bundle = getIntent().getExtras();
         String s = null;
         if (bundle != null) {
             s = bundle.getString("email");
         }
         Toast.makeText(this, "Welcome, " + s, Toast.LENGTH_SHORT).show();
-        //toolbar for drawer navigation
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        //initiate drawer
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view_Login);
-        navigationView.setNavigationItemSelectedListener(this);
+        //floating button to notes
+        FloatingActionButton floatingActionButtonNotes = findViewById(R.id.fab_notes);
+        floatingActionButtonNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Ke Klik Notes Bang", Toast.LENGTH_SHORT).show();
+                Intent notes = new Intent(MainActivity.this, AddData.class);
+                startActivity(notes);
+            }
+        });
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //floating button to ToDo list
+        FloatingActionButton floatingActionButtonTodo = findViewById(R.id.fab_todo);
+        floatingActionButtonTodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Ke Klik Todo Bang", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
-            navigationView.setCheckedItem(R.id.navigation_notes);
-        }
+        setUpRecyclerView();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
-            super.onBackPressed();
-        }
+    //set recycler view for every data added into apps
+    private void setUpRecyclerView() {
+        //to ordered notes by title
+        Query query = collectionReference.orderBy("title", Query.Direction.ASCENDING);
+
+        FirestoreRecyclerOptions<UserData> options = new FirestoreRecyclerOptions.Builder<UserData>()
+                .setQuery(query, UserData.class)
+                .build();
+
+        notesViewAdapter = new NotesViewAdapter(options);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewNotes);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(notesViewAdapter);
+        notesViewAdapter.notifyDataSetChanged();
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                notesViewAdapter.deleteItem(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
+    //provide menu bar
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.navigation_notes:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
-                break;
-            case R.id.navigation_setting:
-//                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-//                startActivity(intent);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment()).commit();
-                break;
-            case  R.id.navigation_exit:
-                Intent home = new Intent(MainActivity.this,LoginActivity.class);
-                finish();
-                startActivity(home);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_bar_main_activity, menu);
         return true;
+    }
+
+    //function when one of the menu bar is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.profile:
+                Toast.makeText(this, "Kepencet Profile Gan", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.settings:
+                Toast.makeText(this, "Kepencet Settings", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.about:
+                Toast.makeText(this, "Ini About", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        notesViewAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (notesViewAdapter != null) {
+            notesViewAdapter.stopListening();
+        }
     }
 }

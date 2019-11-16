@@ -1,6 +1,5 @@
 package com.example.webook;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -21,10 +22,6 @@ public class AddData extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tambah_data);
-
-        //to set toolbar
-        Toolbar toolbar = findViewById(R.id.toolbarData);
-        setSupportActionBar(toolbar);
 
         //supposedly to set back arrow in the toolbar
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_arrow);
@@ -47,34 +44,31 @@ public class AddData extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            //when clicked the save icon
             case R.id.save:
                 saveNote();
                 break;
             case R.id.linkImageUrl:
-                addImageUrl();
+                Toast.makeText(this, "Buat Tambah Image", Toast.LENGTH_SHORT).show();
                 break;
-            case android.R.id.home:
-                Intent intent = new Intent(this, NotesFragment.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-                return true;
         }
         return super.onOptionsItemSelected(menuItem);
     }
 
     //function to save note
     private void saveNote() {
-        String title = mTitle.getText().toString();
+        String titleNote = mTitle.getText().toString();
         String desc = mDescription.getText().toString();
 
         //check if the user fill or not both the fields
-        if (title.trim().isEmpty() && desc.trim().isEmpty()) {
+        if (titleNote.trim().isEmpty() && desc.trim().isEmpty()) {
             Toast.makeText(this, "Cannot Create Empty Notes\nPlease Try Again", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    //function to add image and URL (to be determined)
-    private void addImageUrl() {
+        //collection reference for added data
+        CollectionReference collectionReference = FirebaseFirestore.getInstance()
+                .collection("Notes");
+        collectionReference.add(new UserData(titleNote, desc));
+        Toast.makeText(this, "Note Added", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

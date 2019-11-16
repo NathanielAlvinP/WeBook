@@ -1,24 +1,26 @@
 package com.example.webook;
 
+import com.google.firebase.firestore.PropertyName;
+
 public class UserData {
-    private String title, notes, link, toDo, desc;
+    private String titleNote, desc;
 
     public UserData() {
         //empty constructor needed
     }
 
-    public UserData(String notes, String title, String desc) {
-        this.title = title;
-        this.notes = notes;
+    public UserData(String titleNote, String desc) {
+        this.titleNote = titleNote;
         this.desc = desc;
     }
 
-
-    public String getTitle() {
-        return title;
+    @PropertyName("title")
+    public String getTitleNote() {
+        return titleNote;
     }
 
-    public String getNotes() {
-        return notes;
+    @PropertyName("description")
+    public String getDesc() {
+        return desc;
     }
 }
