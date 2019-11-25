@@ -2,6 +2,7 @@ package com.example.webook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         Pass = findViewById(R.id.Password);
         Button loginButton = findViewById(R.id.LoginButton);
         TextView signup = findViewById(R.id.SignUp);
+
+
 
         //to check if the user's already login or not
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -54,14 +59,29 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             //if login succeed
                             if (task.isSuccessful()) {
-                                Intent main = new Intent(LoginActivity.this, MainActivity.class);
-                                Bundle b = new Bundle();
-                                b.putString("email", emailInp);
-                                main.putExtras(b);
-                                startActivity(main);
-                            } else
-                                //when the login check is failed
+                                if (currentUser != null){
+                                    Intent main = new Intent(LoginActivity.this, MainActivity.class);
+                                    Bundle b = new Bundle();
+                                    b.putString("email", emailInp);
+                                    currentUser = mAuth.getCurrentUser();
+                                    assert currentUser != null;
+                                    Log.i("Authentication ", "Logged User Is " + currentUser.getUid());
+                                    main.putExtras(b);
+                                    startActivity(main);
+                                }
+                                else{
+                                    Intent main = new Intent(LoginActivity.this, MainActivity.class);
+                                    Bundle b = new Bundle();
+                                    b.putString("email", emailInp);
+                                    currentUser = mAuth.getCurrentUser();
+                                    assert currentUser != null;
+                                    Log.i("Authentication ", "Logged User Is " + currentUser.getUid());
+                                    main.putExtras(b);
+                                    startActivity(main);
+                                }
+                            } else {
                                 Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }
