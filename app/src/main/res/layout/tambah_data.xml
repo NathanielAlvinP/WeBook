@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,19 @@
     android:orientation="vertical">
 
     <Toolbar
+        android:id="@+id/toolbarTambahData"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/simpanNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="320dp"
+            android:background="@android:color/transparent"
+            android:text="Simpan" />
+    </Toolbar>
 
     <EditText
         android:id="@+id/titleNote"
@@ -20,6 +30,7 @@
         android:paddingStart="10dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_below="@id/toolbarTambahData"
         tools:ignore="Autofill,RtlSymmetry"
         tools:layout_editor_absoluteX="1dp" />
 
@@ -28,6 +39,7 @@
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_below="@id/titleNote"
         android:background="@android:color/transparent"
         android:ems="10"
         android:gravity="top"
@@ -45,21 +57,21 @@
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true">
+            android:layout_margin="20dp">
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_title="ToDo"/>
+                app:fab_title="ToDo" />
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fab_title="Coba"/>
+                app:fab_title="Coba" />
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
     </RelativeLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
