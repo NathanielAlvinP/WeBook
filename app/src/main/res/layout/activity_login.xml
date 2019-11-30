@@ -9,11 +9,11 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:background="@drawable/backend1">
+    >
 
     <TextView
         android:id="@+id/textView"
-        android:textColor="@color/azure"
+        android:textColor="@color/black_semi_transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_in"
@@ -23,17 +23,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.123" />
+        app:layout_constraintVertical_bias="0.123"
+        android:fontFamily="sans-serif-condensed"/>
 
     <EditText
         android:id="@+id/Email"
-        android:textColorHint="@color/azure"
+        android:textColorHint="@color/half_black"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/boxtext"
         android:hint="@string/email"
         android:paddingStart="5dp"
-        android:textColor="@color/azure"
+        android:textColor="@color/black_semi_transparent"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,9 +47,9 @@
         android:layout_height="40dp"
         android:paddingStart="5dp"
         android:hint="@string/password"
-        android:textColor="@color/azure"
+        android:textColor="@color/black_semi_transparent"
         android:background="@drawable/boxtext"
-        android:textColorHint="@color/azure"
+        android:textColorHint="@color/half_black"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Email"
@@ -60,8 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/log_in"
-        android:textColor="@color/azure"
-        android:background="@color/blue_light"
+        android:textColor="@color/blue_light"
+        android:background="@color/white_pressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account ? "
-        android:textColor="@color/azure"
+        android:textColor="@color/half_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.322"
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="@color/kuning"
+        android:textColor="@color/blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.688"
@@ -93,16 +94,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.671" />
 
-    <TextView
-        android:id="@+id/GuestMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login as Guest Mode"
-        android:textColor="@color/kuning"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

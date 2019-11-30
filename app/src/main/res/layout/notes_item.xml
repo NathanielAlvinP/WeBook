@@ -7,7 +7,10 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    app:cardBackgroundColor="#FFFFE8">
+    app:cardBackgroundColor="#FFF"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
+    android:layout_centerHorizontal="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +23,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:ellipsize="end"
-            android:maxLines="1"
             android:text="@string/judul"
             android:textStyle="bold" />
 

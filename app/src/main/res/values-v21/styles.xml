@@ -2,10 +2,12 @@
 <resources>
 
     <style
-        name="AppTheme.NoActionBar">
+        name="AppTheme.WhiteBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/notificationbar</item>
+        <item name="android:navigationBarColor">@color/half_black</item>
+
     </style>
 
 </resources>

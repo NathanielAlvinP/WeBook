@@ -15,10 +15,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    FirebaseFirestore firestore;
+    private RecyclerViewAdapterNotes adapterNotes;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

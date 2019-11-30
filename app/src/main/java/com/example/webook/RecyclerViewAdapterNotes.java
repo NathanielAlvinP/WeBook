@@ -29,6 +29,7 @@ public class RecyclerViewAdapterNotes extends RecyclerView.Adapter<RecyclerViewA
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_notes_recycler,
                 parent, false);
         firestore = FirebaseFirestore.getInstance();
+
         return new NotesHolder(view);
     }
 
@@ -43,6 +44,7 @@ public class RecyclerViewAdapterNotes extends RecyclerView.Adapter<RecyclerViewA
         return notes.size();
     }
 
+
     public class NotesHolder extends RecyclerView.ViewHolder {
         TextView titleNotes;
         TextView descNotes;
@@ -53,11 +55,5 @@ public class RecyclerViewAdapterNotes extends RecyclerView.Adapter<RecyclerViewA
             descNotes = itemView.findViewById(R.id.isiNotes);
 
         }
-    }
-    private String getDateToday(){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String today = dateFormat.format(date);
-        return today;
     }
 }

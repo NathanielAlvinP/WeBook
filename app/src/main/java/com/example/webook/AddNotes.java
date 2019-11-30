@@ -1,5 +1,6 @@
 package com.example.webook;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,19 +72,32 @@ public class AddNotes extends AppCompatActivity {
         note.put(KEY_TITLE, judul);
         note.put(KEY_DESC, isi);
 
-        firestore.collection(uid).document().set(note)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Note Saved", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Note Cannot Be Saved", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, e.toString());
-                    }
-                });
+        if (!judul.isEmpty()) {
+            firestore.collection(uid).document().set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getApplicationContext(), "Note Saved", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Note Cannot Be Saved", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, e.toString());
+                }
+            });
+        }else{
+            firestore.collection(uid).document().set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getApplicationContext(), "Note Saved", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener(){
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Failed to Save", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
+
 }

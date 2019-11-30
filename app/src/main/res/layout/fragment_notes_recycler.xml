@@ -4,10 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="4dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    app:cardBackgroundColor="#FFFFE8">
+    app:cardBackgroundColor="#FFF"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    android:layout_centerHorizontal="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,17 +33,19 @@
             android:text="Title"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/isiNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:maxLines="1"
+            android:layout_marginTop="25dp"
             android:text="Notes Desc"
-            android:textSize="20sp" />
+            android:maxLines="5"
+            android:textSize="15sp"
+            android:visibility="visible"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

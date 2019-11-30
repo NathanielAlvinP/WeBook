@@ -19,8 +19,6 @@
             android:layout_marginStart="320dp"
             android:background="@android:color/transparent"
             android:text="@string/simpan" />
-        <
-
     </Toolbar>
 
     <EditText
@@ -44,6 +42,7 @@
         android:layout_below="@id/titleNote"
         android:background="@android:color/transparent"
         android:ems="10"
+        android:inputType="textCapCharacters|textMultiLine"
         android:gravity="top"
         android:hint="@string/description"
         android:paddingStart="10dp"
