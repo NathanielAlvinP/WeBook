@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="8dp"
     android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
+    android:orientation="vertical"
     app:cardBackgroundColor="#FFFFE8">
 
     <RelativeLayout
@@ -21,7 +21,7 @@
             android:layout_alignParentEnd="true" />
 
         <TextView
-            android:id="@+id/judulNotes"
+            android:id="@+id/judulTodo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -33,13 +33,13 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/isiNotes"
+            android:id="@+id/isiTodo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="20dp"
             android:maxLines="1"
-            android:text="Notes Desc"
+            android:text="Todo"
             android:textSize="20sp" />
     </RelativeLayout>
 

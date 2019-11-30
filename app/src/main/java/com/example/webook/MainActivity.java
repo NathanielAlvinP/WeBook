@@ -15,32 +15,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    FirebaseAuth mAuth;
-    FirebaseUser currentUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-
         Bundle bundle = getIntent().getExtras();
         String s = null;
         if (bundle != null) {
             s = bundle.getString("email");
         }
-        Toast.makeText(this, "Welcome, "+ s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Welcome, " + s, Toast.LENGTH_SHORT).show();
 
         //toolbar for drawer navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //info user name on drawer
 
         //initiate drawer
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
             navigationView.setCheckedItem(R.id.navigation_notes);
         }
@@ -61,27 +57,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.navigation_notes:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
                 break;
             case R.id.navigation_setting:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new SettingFragment()).commit();
                 break;
-            case  R.id.navigation_exit:
-                Intent home = new Intent(MainActivity.this,LoginActivity.class);
-                finish();
-                startActivity(home);
+            case R.id.navigation_exit:
+                FirebaseAuth.getInstance().signOut();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

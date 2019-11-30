@@ -35,15 +35,12 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.LoginButton);
         TextView signup = findViewById(R.id.SignUp);
 
-
-
         //to check if the user's already login or not
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String emailInp = Email.getText().toString();
                 final String passInp = Pass.getText().toString();
-
                 //if the field is empty
                 if (emailInp.isEmpty()) {
                     Email.setError("Please Enter Your Email");
@@ -55,35 +52,29 @@ public class LoginActivity extends AppCompatActivity {
 
                 //if all the field are filled
                 else {
-                    if (!emailInp.isEmpty() && !passInp.isEmpty()){
-                        mAuth.signInWithEmailAndPassword(emailInp, passInp).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                //if login succeed
-                                if (task.isSuccessful()) {
-                                        Log.d(TAG, "Sign In With Email : Success");
+                    mAuth.signInWithEmailAndPassword(emailInp, passInp)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    //if login succeed
+                                    if (task.isSuccessful()) {
+                                        if (currentUser != null)
+                                            Log.d(TAG, "Sign In With Email : Success");
                                         Bundle b = new Bundle();
                                         b.putString("email", emailInp);
-                                        Intent mainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent mainActivity = new Intent(LoginActivity.this,
+                                                MainActivity.class);
                                         mainActivity.putExtras(b);
                                         currentUser = mAuth.getCurrentUser();
                                         startActivity(mainActivity);
-//                                    else{
-//                                        Intent main = new Intent(LoginActivity.this, MainActivity.class);
-//                                        Bundle b = new Bundle();
-//                                        b.putString("email", emailInp);
-//                                        currentUser = mAuth.getCurrentUser();
-//                                        assert currentUser != null;
-//                                        Log.i("Authentication ", "Logged User Is " + currentUser.getUid());
-//                                        main.putExtras(b);
-//                                        startActivity(main);
-//                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
+                                        finish();
+
+                                    } else {
+                                        Toast.makeText(LoginActivity.this,
+                                                "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-                    }
+                            });
                 }
             }
         });

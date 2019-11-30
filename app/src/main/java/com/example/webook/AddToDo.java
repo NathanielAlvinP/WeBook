@@ -22,17 +22,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class AddNotes extends AppCompatActivity {
-    private EditText mTitle;
-    private EditText mDescription;
-    private ImageButton checkbox;
+public class AddToDo extends AppCompatActivity {
+    private EditText mDescriptionToDo;
 
-    private static final String TAG = "AddNotes";
+    private static final String TAG = "AddTodo";
 
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    private static final String USER_ID = "";
-    private static final String KEY_TITLE = "judul"; //the notes title
     private static final String KEY_DESC = "isi"; //notes desc
 
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -46,42 +42,38 @@ public class AddNotes extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        mTitle = findViewById(R.id.titleNote);
-        mDescription = findViewById(R.id.descriptionNote);
+        mDescriptionToDo = findViewById(R.id.todoList);
         Button simpan = findViewById(R.id.simpanNotes);
 
         //saving notes
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNotes();
+                addTodo();
                 finish();
             }
         });
-
     }
 
     //function save notes
-    private void addNotes() {
+    private void addTodo() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String judul = mTitle.getText().toString().trim();
-        String isi = mDescription.getText().toString().trim();
+        String isi = mDescriptionToDo.getText().toString().trim();
 
         Map<String, Object> note = new HashMap<>();
-        note.put(KEY_TITLE, judul);
         note.put(KEY_DESC, isi);
 
         firestore.collection(uid).document().set(note)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(), "Note Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Todo Saved", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), "Note Cannot Be Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Todo Cannot Be Saved", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });

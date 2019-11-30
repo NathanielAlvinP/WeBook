@@ -4,7 +4,6 @@ public class Notes {
     String id;
     String notesTitle;
     String notesDesc;
-    String notesTodo;
 
     public Notes() {
         //empty constructor needed
@@ -32,15 +31,9 @@ public class Notes {
         this.notesDesc = notesIsi;
     }
 
-    public void setNotesTodo(String notesTodo) {
-        this.notesTodo = notesTodo;
-    }
-
     public String getNotesIsi() {
         return notesDesc;
     }
 
-    public String getNotesTodo() {
-        return notesTodo;
-    }
+    public String getId() { return id; }
 }

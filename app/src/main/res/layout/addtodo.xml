@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbarTambahData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/simpanTodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/simpan" />
+
+    </Toolbar>
+
+
+    <EditText
+        android:id="@+id/todoList"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarTambahData"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/description"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTambahData"
+        tools:ignore="Autofill,MissingConstraints,RtlSymmetry,TextFields"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/bottom_navigation_bar" />
+
+</RelativeLayout>

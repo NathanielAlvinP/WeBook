@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,18 +26,30 @@ import java.util.ArrayList;
 
 public class NotesFragment extends Fragment {
 
+    private static final String KEY_JUDUL = "judul";
+    private static final String KEY_DESC = "isi";
+
     private RecyclerView recyclerViewNotes;
 
+    private TextView userInfo;
+
+    private FirebaseAuth mAuth;
+    private String mUser;
+
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    private RecyclerViewAdapter adapter;
+    private RecyclerViewAdapterNotes adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_notes,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
         recyclerViewNotes = rootView.findViewById(R.id.recycler_viewNotes);
+
+//        mUser = mAuth.getCurrentUser().getDisplayName();
+//        userInfo.setText(mUser);
+
 
         showNotes();
 
@@ -49,30 +63,33 @@ public class NotesFragment extends Fragment {
                 startActivity(add);
             }
         });
+
         return rootView;
     }
 
-    public void showNotes(){
+    public void showNotes() {
+        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final ArrayList<Notes> notes = new ArrayList<>();
-        Task<QuerySnapshot> reference = firestore.collection("Notes").get()
+        final Task<QuerySnapshot> reference = firestore.collection(uid).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 Notes nts = new Notes();
-                                nts.setNotesJudul(documentSnapshot.get("isi").toString());
-                                nts.setNotesIsi(documentSnapshot.get("judul").toString());
+                                nts.setNotesJudul(documentSnapshot.get("judul").toString());
+                                nts.setNotesIsi(documentSnapshot.get("isi").toString());
                                 notes.add(nts);
                             }
                             recyclerViewNotes.setHasFixedSize(true);
                             recyclerViewNotes.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new RecyclerViewAdapter(notes);
+                            adapter = new RecyclerViewAdapterNotes(notes);
                             recyclerViewNotes.setAdapter(adapter);
-                        }else {
+                        } else {
                             Toast.makeText(getContext(), "Failed to Retrieve Data", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
 }
