@@ -18,11 +18,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class    LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     String TAG = "login";
+    Button loginButton;
+    TextView signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Email = findViewById(R.id.Email);
         Pass = findViewById(R.id.Password);
-        Button loginButton = findViewById(R.id.LoginButton);
-        TextView signup = findViewById(R.id.SignUp);
+        loginButton = findViewById(R.id.LoginButton);
+        signup = findViewById(R.id.SignUp);
 
         //to check if the user's already login or not
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -60,14 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         if (currentUser != null)
                                             Log.d(TAG, "Sign In With Email : Success");
-                                        Bundle b = new Bundle();
-                                        b.putString("email", emailInp);
-                                        Intent mainActivity = new Intent(LoginActivity.this,
-                                                MainActivity.class);
-                                        mainActivity.putExtras(b);
-                                        currentUser = mAuth.getCurrentUser();
-                                        startActivity(mainActivity);
-                                        finish();
+                                            Bundle b = new Bundle();
+                                            b.putString("email", emailInp);
+                                            Intent mainActivity = new Intent(LoginActivity.this,
+                                                    MainActivity.class);
+                                            startActivity(mainActivity);
+                                            finish();
 
                                     } else {
                                         Toast.makeText(LoginActivity.this,

@@ -8,8 +8,7 @@
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:background="@drawable/backend1">
+    android:paddingTop="16dp">
 
     <TextView
         android:id="@+id/textSignUp"
@@ -21,7 +20,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.14"
         tools:layout_editor_absoluteX="-16dp"
-        android:textColor="@color/azure"
+        android:textColor="@color/half_black"
+        android:fontFamily="sans-serif-condensed"
         android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
         />
 
@@ -34,7 +34,8 @@
         android:hint="Email"
         android:paddingStart="5dp"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/azure"
+        android:textColorHint="@color/half_black"
+        android:textColor="@color/black_semi_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.374"
@@ -49,7 +50,8 @@
         android:paddingStart="5dp"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="@color/azure"
+        android:textColorHint="@color/half_black"
+        android:textColor="@color/black_semi_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.457"
@@ -63,7 +65,8 @@
         android:paddingStart="5dp"
         android:hint="Password Confirmation"
         android:inputType="textPassword"
-        android:textColorHint="@color/azure"
+        android:textColorHint="@color/half_black"
+        android:textColor="@color/black_semi_transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.535"
@@ -73,12 +76,13 @@
         android:id="@+id/signupButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_light"
+        android:textColor="@color/blue_light"
+        android:background="@color/white_pressed"
         android:text="Sign Up"
-        android:textColor="@color/azure"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.623" />
+        app:layout_constraintVertical_bias="0.623"
+        android:fontFamily="sans-serif-condensed"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

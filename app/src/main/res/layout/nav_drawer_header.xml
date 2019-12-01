@@ -15,5 +15,12 @@
         android:text="@string/we_book"
         android:textColor="@color/azure"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+        android:id="@+id/emailUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ASwu"
+        android:textColor="@color/azure"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

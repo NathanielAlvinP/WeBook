@@ -3,6 +3,8 @@ package com.example.webook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,18 +17,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
     private RecyclerViewAdapterNotes adapterNotes;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         Bundle bundle = getIntent().getExtras();
         String s = null;
@@ -56,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new NotesFragment()).commit();
             navigationView.setCheckedItem(R.id.navigation_notes);
         }
+
+        updateEmail();
     }
 
     @Override
@@ -82,5 +91,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public  void updateEmail(){
+        NavigationView navigationView = findViewById(R.id.nav_view_Login);
+        View header = navigationView.getHeaderView(0);
+        TextView navUser = header.findViewById(R.id.emailUser);
+        navUser.setText(firebaseUser.getEmail());
     }
 }
