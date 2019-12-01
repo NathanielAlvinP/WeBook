@@ -4,8 +4,6 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,8 +25,9 @@ public class NotesRecyclerAdapter extends FirestoreRecyclerAdapter<Note, NotesRe
 
     @Override
     protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull Note note) {
-        holder.noteTextView.setText(note.getText());
+        holder.titleTextView.setText(note.getJudul());
 //        holder.checkBox.setChecked(note.isCompletedTask());
+        holder.descTextView.setText(note.getIsi());
         CharSequence dateCharSeq = DateFormat.format("EEEE, MMM d, yyyy h:mm:ss a", note.getCreatedDate().toDate());
         holder.dateTextView.setText(dateCharSeq);
     }
@@ -42,15 +41,17 @@ public class NotesRecyclerAdapter extends FirestoreRecyclerAdapter<Note, NotesRe
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView noteTextView;
+        TextView titleTextView;
+        TextView descTextView;
         TextView dateTextView;
 //        CheckBox checkBox;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            noteTextView = itemView.findViewById(R.id.noteTextView);
-            dateTextView = itemView.findViewById(R.id.dateTextView);
+            titleTextView = itemView.findViewById(R.id.noteTitle);
+            descTextView = itemView.findViewById(R.id.noteDesc);
+            dateTextView = itemView.findViewById(R.id.noteDate);
 //            checkBox = itemView.findViewById(R.id.checkBox);
 
 //            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

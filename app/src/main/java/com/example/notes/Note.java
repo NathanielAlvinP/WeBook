@@ -3,7 +3,8 @@ package com.example.notes;
 import com.google.firebase.Timestamp;
 
 public class Note {
-    private String text;
+    private String Judul;
+    private String Isi;
     private boolean completedTask;
     private Timestamp createdDate;
     private String userId;
@@ -12,19 +13,20 @@ public class Note {
 
     }
 
-    public Note(String text, boolean completedTask, Timestamp createdDate, String userId) {
-        this.text = text;
+    public Note(String judul, String isi, boolean completedTask, Timestamp createdDate, String userId) {
+        this.Judul = judul;
+        this.setIsi(isi);
         this.completedTask = completedTask;
         this.createdDate = createdDate;
         this.userId = userId;
     }
 
-    public String getText() {
-        return text;
+    public String getJudul() {
+        return Judul;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setJudul(String text) {
+        this.Judul = text;
     }
 
     public boolean isCompletedTask() {
@@ -54,10 +56,18 @@ public class Note {
     @Override
     public String toString() {
         return "Note{" +
-                "text='" + text + '\'' +
+                "text='" + Judul + '\'' +
                 ", completedTask=" + completedTask +
                 ", createdDate=" + createdDate +
                 ", userId='" + userId + '\'' +
                 '}';
+    }
+
+    public String getIsi() {
+        return Isi;
+    }
+
+    public void setIsi(String isi) {
+        Isi = isi;
     }
 }

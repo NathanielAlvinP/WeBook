@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:id="@+id/toolbarTambahData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/simpanNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:src="@drawable/saveicon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.921"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </Toolbar>
+
+    <EditText
+        android:id="@+id/titleNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_below="@id/toolbarTambahData"
+        tools:ignore="Autofill,RtlSymmetry"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <EditText
+        android:id="@+id/descriptionNote"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/titleNote"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:inputType="textCapCharacters|textMultiLine"
+        android:gravity="top"
+        android:hint="Description"
+        android:paddingStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/titleNote"
+        tools:ignore="Autofill,MissingConstraints,RtlSymmetry,TextFields"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionNote"/>
+
+
+
+</RelativeLayout>

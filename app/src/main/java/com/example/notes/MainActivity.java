@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     private RecyclerView recyclerView;
     private static final String TAG = "MainActivity";
     NotesRecyclerAdapter recyclerAdapter;
+    StaggeredGridLayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlertDialog();
+                Intent intent = new Intent(MainActivity.this, AddNotes.class);
+                startActivity(intent);
             }
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_Bar);
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                     case R.id.todoBottomBar:
                         Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
                 }
                 return false;
@@ -84,41 +88,41 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         });
     }
 
-    private void showAlertDialog() {
-        final EditText noteEditText = new EditText(this);
+//    private void showAlertDialog() {
+//        final EditText noteEditText = new EditText(this);
+//
+//        new AlertDialog.Builder(this)
+//                .setTitle("Add Note")
+//                .setView(noteEditText)
+//                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Log.d(TAG, "onClick: " + noteEditText.getText());
+//                        addNote(noteEditText.getText().toString());
+//                    }
+//                }).setNegativeButton("Cancel", null)
+//                .show();
+//    }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Add Note")
-                .setView(noteEditText)
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "onClick: " + noteEditText.getText());
-                        addNote(noteEditText.getText().toString());
-                    }
-                }).setNegativeButton("Cancel", null)
-                .show();
-    }
-
-    private void addNote(String text) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Note note = new Note(text, false, new Timestamp(new Date()), userId);
-
-        FirebaseFirestore.getInstance()
-                .collection("Notes")
-                .add(note)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "onSuccess: Succesfully added the note...");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void addNote(String text) {
+//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        Note note = new Note(text, "isi",false, new Timestamp(new Date()), userId);
+//
+//        FirebaseFirestore.getInstance()
+//                .collection("Notes")
+//                .add(note)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d(TAG, "onSuccess: Succesfully added the note...");
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(MainActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     private void startLoginActivity() {
         Intent intent = new Intent(this, LoginRegister.class);
@@ -189,7 +193,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 .setQuery(query, Note.class)
                 .build();
 
+        manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerAdapter = new NotesRecyclerAdapter(options, this);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(recyclerAdapter);
 
         recyclerAdapter.startListening();
@@ -245,8 +251,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
 
         final Note note = snapshot.toObject(Note.class);
         final EditText editText = new EditText(this);
-        editText.setText(note.getText().toString());
-        editText.setSelection(note.getText().length());
+        editText.setText(note.getJudul().toString());
+        editText.setSelection(note.getJudul().length());
 
         new AlertDialog.Builder(this)
                 .setTitle("Edit Note")
@@ -255,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String newText = editText.getText().toString();
-                        note.setText(newText);
+                        note.setJudul(newText);
                         snapshot.getReference().set(note)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
