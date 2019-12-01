@@ -5,4 +5,14 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style
+        name="AppTheme.WhiteBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/notificationbar</item>
+        <item name="android:icon">@color/half_black</item>
+        <item name="android:textColor">@color/half_black</item>
+        <item name="android:color">@color/azure</item>
+    </style>
 </resources>

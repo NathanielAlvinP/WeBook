@@ -16,28 +16,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.util.Date;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -48,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     private static final String TAG = "MainActivity";
     NotesRecyclerAdapter recyclerAdapter;
     StaggeredGridLayoutManager manager;
+    FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -80,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                     case R.id.todoBottomBar:
                         Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide__in_right,R.anim.slide_out_left);
                         finish();
                         break;
                 }
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
 //    }
 
     private void startLoginActivity() {
-        Intent intent = new Intent(this, LoginRegister.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -152,7 +151,11 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             case R.id.action_logout:
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
                 AuthUI.getInstance().signOut(this);
-
+                Intent backHome = new Intent(MainActivity.this, LoginActivity.class);
+                backHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                backHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(backHome);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseAuth.getInstance().addAuthStateListener(this);
+
     }
 
     @Override
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
 
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-        if (firebaseAuth.getCurrentUser() == null) {
+        if (firebaseAuth.getCurrentUser() == null && firebaseAuth.getCurrentUser().isEmailVerified()) {
             startLoginActivity();
             return;
         }

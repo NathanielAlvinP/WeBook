@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -23,6 +24,8 @@ public class ToDoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+        Toolbar toolbar = findViewById(R.id.toolbarTodo);
+        setSupportActionBar(toolbar);
 
         recyclerViewToDo = findViewById(R.id.recyclerViewTodo);
         fabToDo = findViewById(R.id.fabTodo);
@@ -30,7 +33,7 @@ public class ToDoActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_Bar);
         BottomNavigationHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
+        MenuItem menuItem = menu.getItem(1);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -39,6 +42,8 @@ public class ToDoActivity extends AppCompatActivity {
                     case R.id.notesBottomBar:
                         Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                        finish();
                         break;
                     case R.id.todoBottomBar:
                         break;
