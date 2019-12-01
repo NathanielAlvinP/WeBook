@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class    LoginActivity extends AppCompatActivity {
     private EditText Email, Pass;
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
     FirebaseUser currentUser;
     String TAG = "login";
     Button loginButton;
@@ -32,6 +33,7 @@ public class    LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
         Email = findViewById(R.id.Email);
         Pass = findViewById(R.id.Password);
         loginButton = findViewById(R.id.LoginButton);
@@ -62,8 +64,6 @@ public class    LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         if (currentUser != null)
                                             Log.d(TAG, "Sign In With Email : Success");
-                                            Bundle b = new Bundle();
-                                            b.putString("email", emailInp);
                                             Intent mainActivity = new Intent(LoginActivity.this,
                                                     MainActivity.class);
                                             startActivity(mainActivity);

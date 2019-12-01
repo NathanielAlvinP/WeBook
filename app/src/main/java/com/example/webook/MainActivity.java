@@ -35,13 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        Bundle bundle = getIntent().getExtras();
-        String s = null;
-        if (bundle != null) {
-            s = bundle.getString("email");
-        }
-        Toast.makeText(this, "Welcome, " + s, Toast.LENGTH_SHORT).show();
-
         //toolbar for drawer navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.navigation_exit:
                 FirebaseAuth.getInstance().signOut();
+                Intent backHome = new Intent(MainActivity.this, LoginActivity.class);
+                backHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                backHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(backHome);
+                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
