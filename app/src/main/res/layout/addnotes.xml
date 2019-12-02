@@ -28,40 +28,79 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </Toolbar>
 
-    <EditText
-        android:id="@+id/titleNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:inputType="text"
-        android:paddingStart="10dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_below="@id/toolbarTambahData"
-        tools:ignore="Autofill,RtlSymmetry"
-        tools:layout_editor_absoluteX="1dp" />
 
-    <EditText
-        android:id="@+id/descriptionNote"
-        android:layout_width="408dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_below="@id/titleNote"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:inputType="textCapCharacters|textMultiLine"
-        android:gravity="top"
-        android:hint="Description"
-        android:paddingStart="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/titleNote"
-        tools:ignore="Autofill,MissingConstraints,RtlSymmetry,TextFields"
-        tools:layout_editor_absoluteX="3dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/chosenImage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@id/toolbarTambahData"-->
+<!--            android:layout_marginEnd="387dp"-->
+<!--            android:layout_marginBottom="634dp"-->
+<!--             />-->
+
+        <EditText
+            android:id="@+id/titleNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="Autofill,RtlSymmetry"
+            android:layout_below="@id/toolbarTambahData"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <EditText
+            android:id="@+id/descriptionNote"
+            android:layout_width="408dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_below="@id/titleNote"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="textCapCharacters|textMultiLine"
+            android:gravity="top"
+            android:hint="Description"
+            android:paddingStart="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/titleNote"
+            tools:ignore="Autofill,MissingConstraints,RtlSymmetry,TextFields"
+            tools:layout_editor_absoluteX="3dp" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/descriptionNote"/>
+        android:layout_below="@id/descriptionNote"
+        android:id="@+id/chosenImage"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addImage"
+            android:src="@drawable/addimage"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lastEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timestamp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintStart_toEndOf="@+id/addImage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.512" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

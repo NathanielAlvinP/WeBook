@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -46,6 +47,7 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
     private FloatingActionButton fabToDo;
     TodoRecyclerAdapter recyclerAdapter;
     private static final String TAG = "ToDO";
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Nullable
     @Override
@@ -57,7 +59,7 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
 
         recyclerViewToDo = v.findViewById(R.id.recyclerViewTodo);
         fabToDo = v.findViewById(R.id.fabTodo);
-
+       // initRecyclerView(firebaseAuth.getCurrentUser());
         fabToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +157,8 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
 
 
         recyclerAdapter = new TodoRecyclerAdapter(options, this);
+       // recyclerViewToDo.setLayoutManager(new LinearLayoutManager(requireActivity()));
+//        recyclerViewToDo.setHasFixedSize(true);
         recyclerViewToDo.setAdapter(recyclerAdapter);
 
         recyclerAdapter.startListening();

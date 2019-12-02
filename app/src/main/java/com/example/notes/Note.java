@@ -1,5 +1,7 @@
 package com.example.notes;
 
+import android.media.Image;
+
 import com.google.firebase.Timestamp;
 
 public class Note {
@@ -8,7 +10,7 @@ public class Note {
     private boolean completedTask;
     private Timestamp createdDate;
     private String userId;
-
+    private String imgURL;
     public Note() {
 
     }
@@ -60,6 +62,7 @@ public class Note {
                 ", completedTask=" + completedTask +
                 ", createdDate=" + createdDate +
                 ", userId='" + userId + '\'' +
+                ", Image='"+imgURL+ '\''+
                 '}';
     }
 
@@ -69,5 +72,12 @@ public class Note {
 
     public void setIsi(String isi) {
         Isi = isi;
+    }
+
+    public void setImage(String img){
+        this.imgURL = img;
+    }
+    public String getImage(){
+        return imgURL;
     }
 }

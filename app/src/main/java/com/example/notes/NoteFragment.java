@@ -40,6 +40,8 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
         NavigationView.OnNavigationItemSelectedListener{
     private RecyclerView recyclerView;
     private static final String TAG = "MainActivity";
+
+
     NotesRecyclerAdapter recyclerAdapter;
     StaggeredGridLayoutManager manager;
 
@@ -51,7 +53,6 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
         View v = inflater.inflate(R.layout.activity_main, container, false);
         recyclerView = v.findViewById(R.id.recyclerView);
         FloatingActionButton fab = v.findViewById(R.id.fab);
-
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
