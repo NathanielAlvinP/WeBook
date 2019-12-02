@@ -54,12 +54,9 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.activity_todo,container,false);
-//        Toolbar toolbar = v.findViewById(R.id.toolbarTodo);
-//        setSupportActionBar(toolbar);
 
         recyclerViewToDo = v.findViewById(R.id.recyclerViewTodo);
         fabToDo = v.findViewById(R.id.fabTodo);
-       // initRecyclerView(firebaseAuth.getCurrentUser());
         fabToDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,49 +67,10 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
         return v;
     }
 
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        //setContentView(R.layout.activity_todo);
-//
-//
-////        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav_Bar);
-////        BottomNavigationHelper.disableShiftMode(bottomNavigationView);
-////        Menu menu = bottomNavigationView.getMenu();
-////        MenuItem menuItem = menu.getItem(1);
-////
-////        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-////            @Override
-////            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-////                switch (menuItem.getItemId()){
-////                    case R.id.notesBottomBar:
-////                        Intent intent = new Intent(ToDoActivity.this, MainActivity.class);
-////                        startActivity(intent);
-////                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-////                        finish();
-////                        break;
-////                    case R.id.todoBottomBar:
-////                        break;
-////                }
-////                return false;
-////            }
-////        });
-//
-//
-//    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
     @Override
     public void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(this);
-        //recyclerAdapter.startListening();
     }
 
     @Override
@@ -154,8 +112,8 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
 //        FirestoreRecyclerOptions<ToDo> options = new FirestoreRecyclerOptions.Builder<ToDo>()
 //                .setQuery(query, ToDo.class)
 //                .build();
-//
-//
+
+
 //        recyclerAdapter = new TodoRecyclerAdapter(options, this);
 //       // recyclerViewToDo.setLayoutManager(new LinearLayoutManager(requireActivity()));
 ////        recyclerViewToDo.setHasFixedSize(true);
