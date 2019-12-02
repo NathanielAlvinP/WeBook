@@ -25,9 +25,16 @@ public class NotesRecyclerAdapter extends FirestoreRecyclerAdapter<Note, NotesRe
 
     @Override
     protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull Note note) {
+        if(note.getJudul().isEmpty()){
+            holder.titleTextView.setVisibility(View.GONE);
+        }else if(note.getIsi().isEmpty()){
+            holder.descTextView.setVisibility(View.GONE);
+        }else{
+
+        }
         holder.titleTextView.setText(note.getJudul());
-//        holder.checkBox.setChecked(note.isCompletedTask());
         holder.descTextView.setText(note.getIsi());
+//        holder.checkBox.setChecked(note.isCompletedTask());
         CharSequence dateCharSeq = DateFormat.format("EEEE, MMM d, yyyy h:mm:ss a", note.getCreatedDate().toDate());
         holder.dateTextView.setText(dateCharSeq);
     }
