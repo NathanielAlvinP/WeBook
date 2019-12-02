@@ -145,26 +145,26 @@ public class ToDoActivity extends Fragment implements FirebaseAuth.AuthStateList
     }
 
     private void initRecyclerView(FirebaseUser user) {
-        Query query = FirebaseFirestore.getInstance()
-                .collection("Notes")
-                .whereEqualTo("userId", user.getUid())
-                .orderBy("completedTask", Query.Direction.ASCENDING)
-                .orderBy("createdDate", Query.Direction.DESCENDING);
-
-        FirestoreRecyclerOptions<ToDo> options = new FirestoreRecyclerOptions.Builder<ToDo>()
-                .setQuery(query, ToDo.class)
-                .build();
-
-
-        recyclerAdapter = new TodoRecyclerAdapter(options, this);
-       // recyclerViewToDo.setLayoutManager(new LinearLayoutManager(requireActivity()));
-//        recyclerViewToDo.setHasFixedSize(true);
-        recyclerViewToDo.setAdapter(recyclerAdapter);
-
-        recyclerAdapter.startListening();
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerViewToDo);
+//        Query query = FirebaseFirestore.getInstance()
+//                .collection("Notes")
+//                .whereEqualTo("userId", user.getUid())
+//                .orderBy("completedTask", Query.Direction.ASCENDING)
+//                .orderBy("createdDate", Query.Direction.DESCENDING);
+//
+//        FirestoreRecyclerOptions<ToDo> options = new FirestoreRecyclerOptions.Builder<ToDo>()
+//                .setQuery(query, ToDo.class)
+//                .build();
+//
+//
+//        recyclerAdapter = new TodoRecyclerAdapter(options, this);
+//       // recyclerViewToDo.setLayoutManager(new LinearLayoutManager(requireActivity()));
+////        recyclerViewToDo.setHasFixedSize(true);
+//        recyclerViewToDo.setAdapter(recyclerAdapter);
+//
+//        recyclerAdapter.startListening();
+//
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+//        itemTouchHelper.attachToRecyclerView(recyclerViewToDo);
     }
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         @Override
