@@ -20,6 +20,7 @@ public class SignupActivity extends AppCompatActivity {
     public EditText emailSignup, passSignup, passCheck;
     public Button button;
     private FirebaseAuth mAuth;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,28 +32,28 @@ public class SignupActivity extends AppCompatActivity {
         button = findViewById(R.id.signupButton);
 
 
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 mAuth = FirebaseAuth.getInstance();
                 String email = emailSignup.getText().toString();
                 String pass = passSignup.getText().toString();
                 String repass = passCheck.getText().toString();
 
                 //cek field kosong
-                if(email.isEmpty()){
+                if (email.isEmpty()) {
                     emailSignup.setError("Please Enter Your Email");
                     emailSignup.requestFocus();
-                }else if(pass.isEmpty()){
+                } else if (pass.isEmpty()) {
                     passSignup.setError("Please Create Your Password");
                     passSignup.requestFocus();
-                }else if(repass.isEmpty()){
+                } else if (repass.isEmpty()) {
                     passCheck.setError("Please re-enter Your Password");
                     passCheck.requestFocus();
                 }
 
                 //jika reenter pass tidak sesuai dengan pass
-                else if(!pass.equals(repass)){
+                else if (!pass.equals(repass)) {
                     Toast.makeText(SignupActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                     emailSignup.getText().clear();
                     passSignup.getText().clear();
@@ -60,27 +61,27 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 //jika semua sesuai ketentuan
-                else if(!(pass.isEmpty()&& email.isEmpty()) && pass.equals(repass)){
+                else if (!(pass.isEmpty() && email.isEmpty()) && pass.equals(repass)) {
                     mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
+                                        if (task.isSuccessful()) {
                                             Toast.makeText(SignupActivity.this, "Please check your email for verification", Toast.LENGTH_SHORT).show();
-                                            Intent Login = new Intent(SignupActivity.this,LoginActivity.class);
+                                            Intent Login = new Intent(SignupActivity.this, LoginActivity.class);
                                             finish();
                                             startActivity(Login);
-                                        }else{
+                                        } else {
                                             Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
                                 });
 
-                            }else
+                            } else
                                 Toast.makeText(SignupActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                         }
                     });

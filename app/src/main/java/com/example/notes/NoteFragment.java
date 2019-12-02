@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,9 +47,12 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        setHasOptionsMenu(true);
         View v = inflater.inflate(R.layout.activity_main, container, false);
         recyclerView = v.findViewById(R.id.recyclerView);
         FloatingActionButton fab = v.findViewById(R.id.fab);
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,7 +158,7 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
 
         final Note note = snapshot.toObject(Note.class);
         final EditText editText = new EditText(getContext());
-        editText.setText(note.getJudul().toString());
+        editText.setText(note.getJudul());
         editText.setSelection(note.getJudul().length());
 
         new AlertDialog.Builder(requireActivity())
@@ -184,13 +187,13 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menu.clear();
+        menuInflater.inflate(R.menu.menu_main, menu);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

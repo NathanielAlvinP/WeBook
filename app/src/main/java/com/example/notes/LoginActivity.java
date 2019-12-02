@@ -27,11 +27,10 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     FirebaseUser currentUser;
-    private static final  String TAG = "login";
+    private static final String TAG = "login";
     Button loginButton;
-    TextView signup,login,dontHave;
+    TextView signup, login, dontHave;
     ProgressBar progressBar;
-
 
 
     @Override
@@ -79,25 +78,26 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     //if login succeed
 
-                                    if (task.isSuccessful()) {Email.getText().clear();
-                                       if(mAuth.getCurrentUser().isEmailVerified()){
-                                           Log.d(TAG, "Sign In With Email : Success");
-                                           Intent mainActivity = new Intent(LoginActivity.this,
-                                                   MainActivity.class);
-                                           startActivity(mainActivity);
-                                           finish();
-                                       }else {
-                                           Toast.makeText(LoginActivity.this,
-                                                   "Please verify your Account ", Toast.LENGTH_SHORT).show();
-                                           Pass.getText().clear();
-                                           dontHave.setVisibility(View.VISIBLE);
-                                           login.setVisibility(View.VISIBLE);
-                                           signup.setVisibility(View.VISIBLE);
-                                           loginButton.setVisibility(View.VISIBLE);
-                                           Email.setVisibility(View.VISIBLE);
-                                           Pass.setVisibility(View.VISIBLE);
-                                           progressBar.setVisibility(View.GONE);
-                                       }
+                                    if (task.isSuccessful()) {
+                                        Email.getText().clear();
+                                        if (mAuth.getCurrentUser().isEmailVerified()) {
+                                            Log.d(TAG, "Sign In With Email : Success");
+                                            Intent mainActivity = new Intent(LoginActivity.this,
+                                                    MainActivity.class);
+                                            startActivity(mainActivity);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(LoginActivity.this,
+                                                    "Please verify your Account ", Toast.LENGTH_SHORT).show();
+                                            Pass.getText().clear();
+                                            dontHave.setVisibility(View.VISIBLE);
+                                            login.setVisibility(View.VISIBLE);
+                                            signup.setVisibility(View.VISIBLE);
+                                            loginButton.setVisibility(View.VISIBLE);
+                                            Email.setVisibility(View.VISIBLE);
+                                            Pass.setVisibility(View.VISIBLE);
+                                            progressBar.setVisibility(View.GONE);
+                                        }
                                     } else {
                                         Toast.makeText(LoginActivity.this,
                                                 "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
@@ -127,4 +127,4 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
-    }
+}
