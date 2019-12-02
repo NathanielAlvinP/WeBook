@@ -11,6 +11,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 public class AddNotes extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class AddNotes extends AppCompatActivity {
     private Uri mImageUri;
     private Note note = new Note();
     private StorageReference mStorageRef;
+    private TextView timestamp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,11 @@ public class AddNotes extends AppCompatActivity {
         addImage = findViewById(R.id.addImage);
         imageContainer = findViewById(R.id.chosenImage);
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        timestamp = findViewById(R.id.lastEdit);
+
+        String currentDate = DateFormat.getDateInstance().format(new Date());
+
+        timestamp.setText(currentDate);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,12 +127,12 @@ public class AddNotes extends AppCompatActivity {
     }
     private void uploadFile(){
         if(mImageUri != null){
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+"."+getFileExtension(mImageUri));
             Toast.makeText(this, mImageUri.toString(), Toast.LENGTH_SHORT).show();
             fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    uploadImg img = new uploadImg(taskSnapshot.getUploadSessionUri().toString());
+                    uploadImg img = new uploadImg(fileReference.getDownloadUrl().toString());
                     Toast.makeText(AddNotes.this,taskSnapshot.getStorage().getDownloadUrl().toString() , Toast.LENGTH_SHORT).show();
                     note.setImage(img.getImageUrl());
                 }

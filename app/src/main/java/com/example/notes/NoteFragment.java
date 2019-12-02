@@ -161,16 +161,18 @@ public class NoteFragment extends Fragment implements FirebaseAuth.AuthStateList
 
         final Note note = snapshot.toObject(Note.class);
         final EditText editText = new EditText(getContext());
+        final EditText editTextisi = new EditText(getContext());
         editText.setText(note.getJudul());
+        editTextisi.setText(note.getIsi());
         editText.setSelection(note.getJudul().length());
 
         new AlertDialog.Builder(requireActivity())
-                .setTitle("Edit Note")
-                .setView(editText)
+                .setTitle("Edit")
+                .setView(editTextisi)
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String newText = editText.getText().toString();
+                        String newText = editTextisi.getText().toString();
                         note.setJudul(newText);
                         snapshot.getReference().set(note)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
